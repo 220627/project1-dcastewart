@@ -133,7 +133,7 @@ public class ReimbDAO {
 		return null;
 	}
 	
-public ArrayList<Reimbursement> getUserReimbursements(int author){
+	public ArrayList<Reimbursement> getUserReimbursements(int author){
 		
 		try(Connection conn = ConnectionUtil.getConnection()){
 			
@@ -166,6 +166,43 @@ public ArrayList<Reimbursement> getUserReimbursements(int author){
 		
 		
 		return null;
+	}
+	
+	
+	public ArrayList<Reimbursement> getReimbsByStatus(int status){
+		
+try(Connection conn = ConnectionUtil.getConnection()){
+			
+			String sql = "select * from reimbursements where reimb_status_id = ?;";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, status);
+			ResultSet rs = ps.executeQuery();
+			
+			ArrayList<Reimbursement> reimbs = new ArrayList<>();
+			
+			while(rs.next()) {
+				Reimbursement r = new Reimbursement(
+						rs.getInt("reimb_id"),
+						rs.getDouble("reimb_amt"),
+						rs.getTimestamp("reimb_submitted"),
+						rs.getInt("reimb_author"),
+						rs.getInt("reimb_status_id"),
+						rs.getInt("reimb_type_id"),
+						rs.getString("reimb_description")
+						);
+				reimbs.add(r);
+			}
+			
+			return reimbs;
+			
+		} catch (SQLException e) {
+			System.out.println("Get reimbursments by status failed");
+			e.printStackTrace();
+		}
+		
+		
+		return null;
+		
 	}
 	
 	

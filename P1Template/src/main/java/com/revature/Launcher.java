@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
+import com.revature.controllers.AuthController;
+import com.revature.controllers.ReimbController;
+import com.revature.controllers.UserController;
 import com.revature.daos.ReimbDAO;
 import com.revature.daos.UserDAO;
 import com.revature.models.Reimbursement;
@@ -33,8 +36,8 @@ public class Launcher {
 			e.printStackTrace();
 		}
 		
-		UserDAO uDAO = new UserDAO();
-		ReimbDAO rDAO = new ReimbDAO();
+//		UserDAO uDAO = new UserDAO();
+//		ReimbDAO rDAO = new ReimbDAO();
 //		System.out.println(uDAO.getUserByID(1));
 //		Reimbursement r = new Reimbursement(400.00, 1, 1, 1, "Hotel for Business trip");
 //		System.out.println(rDAO.insertReimb(r));
@@ -43,15 +46,33 @@ public class Launcher {
 //		System.out.println("============editing");
 //		rDAO.editStatus(1, 2);
 //		System.out.println(rDAO.getReimbByID(1));
-		System.out.println(rDAO.getUserReimbursements(1));
+//		System.out.println(rDAO.getUserReimbursements(1));
 		
-//		Javalin app = Javalin.create(
-//				
-//				config -> {
-//					config.enableCorsForAllOrigins();
-//				}
-//				
-//				).start(3000);
+		Javalin app = Javalin.create(
+				
+				config -> {
+					config.enableCorsForAllOrigins();
+				}
+				
+				).start(3000);
+		
+		UserController uc = new UserController();
+		AuthController ac = new AuthController();
+		ReimbController rc = new ReimbController();
+		
+		app.get("/users/:id", uc.getUserByIDHandler);
+		app.post("/login", ac.loginHandler);
+		app.get("/reimbursements", rc.getAllReimbsHandler);
+		app.post("/reimbursements", rc.createReimbHandler);
+		app.put("/reimbursements/:id", rc.editStatusHandler);
+		app.get("/reimbursements/:status", rc.getReimbsByStatusHandler);
+		
+		
+		
+		
+		
+		
+		
 		
 //               __
 //          (___()'`;

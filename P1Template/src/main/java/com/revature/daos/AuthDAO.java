@@ -16,7 +16,7 @@ public class AuthDAO {
 		
 		try(Connection conn = ConnectionUtil.getConnection()){
 			
-		String sql = "select * from users where username = ? and password = ?;";
+		String sql = "SELECT * FROM users WHERE user_username = ? AND user_password = ?;";
 			
 		PreparedStatement ps = conn.prepareStatement(sql);
 		
@@ -38,6 +38,7 @@ public class AuthDAO {
 					rs.getString("user_email"),
 					rs.getInt("user_role_id")
 					);
+			System.out.println(u);
 			
 			return u;
 			

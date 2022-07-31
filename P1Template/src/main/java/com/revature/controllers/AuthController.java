@@ -33,17 +33,17 @@ public class AuthController {
 		
 		LoginDTO lDTO = gson.fromJson(body, LoginDTO.class);
 		
+		
 		User user = as.login(lDTO.getUsername(), lDTO.getPassword()); 
 		
 		if(user != null) { 
 			
-			//log that the user logged in successfully
 			log.info("User Logged In!");
 			
 			ses = ctx.req.getSession(); 
 			currentUser = user;
 			
-			String userJSON = gson.toJson(user); //turn the returned User into JSON
+			String userJSON = gson.toJson(user);
 			
 			ctx.result(userJSON); //send the user to the front end
 			ctx.status(202); 
@@ -53,6 +53,7 @@ public class AuthController {
 			log.warn("User Failed to Login!");
 			
 			ctx.status(401);
+			ctx.result("login failed");
 		} 
 		
 	}; 

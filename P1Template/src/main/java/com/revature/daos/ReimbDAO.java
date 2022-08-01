@@ -177,7 +177,7 @@ public class ReimbDAO {
 	
 	public ArrayList<Reimbursement> getReimbsByStatus(int status){
 		
-try(Connection conn = ConnectionUtil.getConnection()){
+		try(Connection conn = ConnectionUtil.getConnection()){
 			
 			String sql = "select * from reimbursements where reimb_status_id = ?;";
 			PreparedStatement ps = conn.prepareStatement(sql);

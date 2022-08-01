@@ -66,6 +66,7 @@ public class Launcher {
 		app.post("/reimbursements", rc.createReimbHandler);
 		app.put("/reimbursements/:id", rc.editStatusHandler);
 		app.get("/reimbursements/:status", rc.getReimbsByStatusHandler);
+		app.post("/logout", ac.logoutHandler);
 		
 		
 		

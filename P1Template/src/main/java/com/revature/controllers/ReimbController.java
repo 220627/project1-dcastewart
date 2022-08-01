@@ -69,7 +69,7 @@ public class ReimbController {
 	public Handler editStatusHandler = (ctx) -> {
 		
 		if(AuthController.ses != null) {
-			if(AuthController.currentUser.getRole().getRole_id() == 2) {
+			if(AuthController.currentUser.getRole().getRole_id() == 1) {
 				String body = ctx.body();
 				Gson gson = new Gson();
 				int newStatus = gson.fromJson(body, Integer.class);
@@ -84,7 +84,9 @@ public class ReimbController {
 				
 			} else {
 				ctx.result("Only managers can change reimbursement requests statuses");
+				
 				ctx.status(401);
+				
 			}
 		} else {
 			ctx.result("You are not logged in");

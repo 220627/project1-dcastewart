@@ -1,5 +1,17 @@
 const url = "http://localhost:3000";
 document.getElementById("submitButton").onclick = addReimb
+document.getElementById("logoutButton").onclick = logout
+
+
+async function logout(){
+    let response = await fetch(url + "/logout", {
+        method: "POST", 
+        body: "", 
+        credentials: "include"
+    })
+
+    location.assign("./login.html");
+}
 
 
 async function addReimb(){

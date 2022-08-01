@@ -1,0 +1,5 @@
+2022-08-01 01:35:43 INFO  AuthController:41 - User Logged In!
+2022-08-01 01:35:43 INFO  ReimbController:35 - User accessed all reimbursements available to them
+2022-08-01 01:36:15 INFO  ReimbController:60 - Employee created a reimbursement request
+2022-08-01 01:36:15 INFO  ReimbController:35 - User accessed all reimbursements available to them
+2022-08-01 01:36:18 INFO  AuthController:66 - User Logged Out

@@ -13,7 +13,12 @@ import com.revature.models.ReimbDTO;
 import com.revature.models.Reimbursement;
 import com.revature.utils.ConnectionUtil;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class ReimbDAO {
+	
+	public static Logger log = LogManager.getLogger();
 
 	public ReimbDAO() {
 		super();

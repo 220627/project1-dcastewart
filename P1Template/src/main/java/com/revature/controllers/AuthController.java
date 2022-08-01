@@ -66,7 +66,6 @@ public class AuthController {
 			log.info("User Logged Out");
 			ctx.status(200);
 		} else {
-			log.warn("No user to log out");
 			ctx.status(400);
 		}
 	};

@@ -5,8 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
+import com.revature.controllers.AuthController;
+import com.revature.models.ReimbDTO;
 import com.revature.models.Reimbursement;
 import com.revature.utils.ConnectionUtil;
 
@@ -15,6 +18,8 @@ public class ReimbDAO {
 	public ReimbDAO() {
 		super();
 	}
+	
+	AuthController ac = new AuthController();
 	
 	public Reimbursement getReimbByID(int id) {
 		
@@ -47,25 +52,26 @@ public class ReimbDAO {
 		return null;
 	}
 	
-	public boolean insertReimb(Reimbursement r) {
+	public boolean insertReimb(ReimbDTO r) {
 		
 		try(Connection conn = ConnectionUtil.getConnection()){
 			
 			String sql = "insert into reimbursements (reimb_amt, reimb_submitted, reimb_author, reimb_status_id, reimb_type_id, reimb_description)"
 					+ " values (?, ?, ?, ?, ?, ?);";
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setDouble(1, r.getReimb_amt());
-			ps.setTimestamp(2, r.getReimb_submitted());
-			ps.setInt(3, r.getReimb_author().getUser_id());
-			ps.setInt(4, r.getReimbStatus().getReimb_status_id());
-			ps.setInt(5, r.getReimbType().getReimb_type_id());
-			ps.setString(6, r.getReimbDescription());
+			System.out.println(r.getReimb_amt());
+			ps.setDouble(1, Double.parseDouble(r.getReimb_amt()));
+			ps.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
+			ps.setInt(3, ac.currentUser.getUser_id());
+			ps.setInt(4, 1);
+			ps.setInt(5, 4);
+			ps.setString(6, r.getReimb_description());
 			
 			System.out.println(ps);
 			
 			ps.executeUpdate();
 			
-			System.out.println("Reimbursement " + r.getReimb_id() + " was added!");
+			System.out.println("Reimbursement was added!");
 			
 			return true;
 			

@@ -38,7 +38,6 @@ public class AuthDAO {
 					rs.getString("user_email"),
 					rs.getInt("user_role_id")
 					);
-			System.out.println(u);
 			
 			return u;
 			

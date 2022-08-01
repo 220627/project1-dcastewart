@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import com.revature.daos.ReimbDAO;
+import com.revature.models.ReimbDTO;
 import com.revature.models.Reimbursement;
 
 import io.javalin.http.Handler;
@@ -11,6 +12,7 @@ import io.javalin.http.Handler;
 public class ReimbController {
 	
 	ReimbDAO rDAO = new ReimbDAO();
+	AuthController ac = new AuthController();
 	
 	
 	public Handler getAllReimbsHandler = (ctx) -> {
@@ -43,7 +45,7 @@ public class ReimbController {
 				String body = ctx.body();
 				Gson gson = new Gson();
 				
-				Reimbursement r = gson.fromJson(body, Reimbursement.class);
+				ReimbDTO r = gson.fromJson(body, ReimbDTO.class);
 				
 				if(rDAO.insertReimb(r)) {
 					ctx.status(202);
